@@ -9,7 +9,7 @@ env:
   GLOBAL_SECRET: $SECRET_TOKEN
 jobs:
   install_packages:
-    runs-on: ''
+    runs-on: ubuntu-latest
     env:
       BUILD_ENV: production
     steps:
@@ -18,8 +18,18 @@ jobs:
     - name: packeged installed
       run: echo "Dependencies installed successfully!"
     if: ($CI_COMMIT_BRANCH == "main")
+  lint_code:
+    runs-on: ubuntu-latest
+    env:
+      BUILD_ENV: production
+    steps:
+    - name: lint
+      run: echo "linting code..." && sleep 10
+    - name: packeged installed
+      run: echo "Code linted successfully!"
+    if: ($CI_COMMIT_BRANCH == "main")
   build_project:
-    runs-on: ''
+    runs-on: ubuntu-latest
     steps:
     - name: create build
       run: echo "Building project..." && sleep 10
@@ -27,7 +37,7 @@ jobs:
       run: echo "Project built successfully!"
     if: ($CI_COMMIT_BRANCH == "master")
   deploy_to_production:
-    runs-on: ''
+    runs-on: ubuntu-latest
     steps:
     - name: deploy
       run: echo "Deploying to production..." && sleep 10
