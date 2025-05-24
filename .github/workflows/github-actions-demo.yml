@@ -1,0 +1,36 @@
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - develop
+env:
+  GLOBAL_SECRET: $SECRET_TOKEN
+jobs:
+  install_packages:
+    runs-on: ''
+    env:
+      BUILD_ENV: production
+    steps:
+    - name: install
+      run: echo "Installing dependencies..." && sleep 10
+    - name: packeged installed
+      run: echo "Dependencies installed successfully!"
+    if: ($CI_COMMIT_BRANCH == "main")
+  build_project:
+    runs-on: ''
+    steps:
+    - name: create build
+      run: echo "Building project..." && sleep 10
+    - name: build created
+      run: echo "Project built successfully!"
+    if: ($CI_COMMIT_BRANCH == "master")
+  deploy_to_production:
+    runs-on: ''
+    steps:
+    - name: deploy
+      run: echo "Deploying to production..." && sleep 10
+    - name: deployment completed
+      run: echo "Deployment completed successfully!"
+    if: ($CI_COMMIT_BRANCH == "main")
