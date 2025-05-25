@@ -13,16 +13,16 @@ jobs:
     env:
       BUILD_ENV: production
     steps:
-    - name: install packages
+    - name: install
       run: echo "Installing dependencies..." && sleep 10
-    - name: packeged installed
-      run: echo "Dependencies installed successfully!"
+    - name: packeges installed
+      run: echo "Dependencies installed successfully!" && echo "Hello, Class!"
   linting:
     runs-on: ubuntu-latest
     env:
       BUILD_ENV: production
     steps:
-    - name: lint code
+    - name: lint
       run: echo "linting code..." && sleep 10
     - name: packeged installed
       run: echo "Code linted successfully!"
