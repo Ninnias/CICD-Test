@@ -22,12 +22,10 @@ jobs:
       run: npm run build $BUILD_FLAG
       env:
         BUILD_FLAG: --prod
-    if: ($CI_COMMIT_BRANCH == "main")
   test:
     runs-on: ubuntu-latest
     steps:
     - name: test-suite
       run: npm test
-    if: ($CI_COMMIT_BRANCH == "main")
     needs:
     - build
