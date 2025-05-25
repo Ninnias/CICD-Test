@@ -1,4 +1,4 @@
-name: cross-platform-pipeline
+name: Hello Class Pipeline
 on:
   push:
     branches:
@@ -9,23 +9,35 @@ on:
 env:
   GLOBAL_SECRET: $SECRET_TOKEN
 jobs:
-  build:
+  install_all_packages:
     runs-on: ubuntu-latest
-    container:
-      image: node:18
     env:
       BUILD_ENV: production
     steps:
     - name: install
-      run: npm install
-    - name: compile
-      run: npm run build $BUILD_FLAG
-      env:
-        BUILD_FLAG: --prod
-  test:
+      run: echo "Installing dependencies..." && sleep 10
+    - name: packeges installed
+      run: echo "Dependencies installed successfully!" && echo "Hello, Class!"
+  linting_my_code:
+    runs-on: ubuntu-latest
+    env:
+      BUILD_ENV: production
+    steps:
+    - name: lint
+      run: echo "linting code..." && sleep 10
+    - name: packeged installed
+      run: echo "Code linted successfully!"
+  build:
     runs-on: ubuntu-latest
     steps:
-    - name: test-suite
-      run: npm test
-    needs:
-    - build
+    - name: create build
+      run: echo "Building project..." && sleep 10
+    - name: build created
+      run: echo "Project built successfully!"
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: deploy
+      run: echo "Deploying to production..." && sleep 10
+    - name: deployment completed
+      run: echo "Deployment completed successfully!"
