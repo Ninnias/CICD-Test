@@ -13,7 +13,7 @@ jobs:
     env:
       BUILD_ENV: production
     steps:
-    - name: install
+    - name: install packages
       run: echo "Installing dependencies..." && sleep 10
     - name: packeged installed
       run: echo "Dependencies installed successfully!"
@@ -22,7 +22,7 @@ jobs:
     env:
       BUILD_ENV: production
     steps:
-    - name: lint
+    - name: lint code
       run: echo "linting code..." && sleep 10
     - name: packeged installed
       run: echo "Code linted successfully!"
