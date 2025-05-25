@@ -1,3 +1,4 @@
+name: cross-platform-pipeline
 on:
   push:
     branches:
@@ -8,35 +9,25 @@ on:
 env:
   GLOBAL_SECRET: $SECRET_TOKEN
 jobs:
-  install:
+  build:
     runs-on: ubuntu-latest
+    container:
+      image: node:18
     env:
       BUILD_ENV: production
     steps:
     - name: install
-      run: echo "Installing dependencies..." && sleep 10
-    - name: packeges installed
-      run: echo "Dependencies installed successfully!" && echo "Hello, Class!"
-  linting:
-    runs-on: ubuntu-latest
-    env:
-      BUILD_ENV: production
-    steps:
-    - name: lint
-      run: echo "linting code..." && sleep 10
-    - name: packeged installed
-      run: echo "Code linted successfully!"
-  build:
+      run: npm install
+    - name: compile
+      run: npm run build $BUILD_FLAG
+      env:
+        BUILD_FLAG: --prod
+    if: ($CI_COMMIT_BRANCH == "main")
+  test:
     runs-on: ubuntu-latest
     steps:
-    - name: create build
-      run: echo "Building project..." && sleep 10
-    - name: build created
-      run: echo "Project built successfully!"
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-    - name: deploy
-      run: echo "Deploying to production..." && sleep 10
-    - name: deployment completed
-      run: echo "Deployment completed successfully!"
+    - name: test-suite
+      run: npm test
+    if: ($CI_COMMIT_BRANCH == "main")
+    needs:
+    - build
