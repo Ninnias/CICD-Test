@@ -9,35 +9,36 @@ on:
 env:
   GLOBAL_SECRET: $SECRET_TOKEN
 jobs:
-  install_all_packages:
+  install_packages:
     runs-on: ubuntu-latest
+    container:
+      image: node:18
     env:
       BUILD_ENV: production
     steps:
     - name: install
-      run: echo "Installing dependencies..." && sleep 10
+      run: echo "Installing dependencies..." && sleep 5
     - name: packeges installed
       run: echo "Dependencies installed successfully!" && echo "Hello, Class!"
-  linting_my_code:
+  build_stuff:
     runs-on: ubuntu-latest
-    env:
-      BUILD_ENV: production
+    container:
+      image: node:18
     steps:
-    - name: lint
-      run: echo "linting code..." && sleep 10
-    - name: packeged installed
-      run: echo "Code linted successfully!"
-  build:
+    - name: install packages again
+      run: echo "Building stuff" && sleep 10
+    - name: build project
+      run: echo "Stuff has been built"
+  test:
     runs-on: ubuntu-latest
+    container:
+      image: node:18
     steps:
-    - name: create build
-      run: echo "Building project..." && sleep 10
-    - name: build created
-      run: echo "Project built successfully!"
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-    - name: deploy
-      run: echo "Deploying to production..." && sleep 10
-    - name: deployment completed
-      run: echo "Deployment completed successfully!"
+    - name: component tests
+      run: echo "Running component tests" && sleep 5
+    - name: e2e tests
+      run: echo "Running end-to-end tests" && sleep 5
+    - name: integration tests
+      run: echo "Running integration tests" && sleep 5
+    - name: run succesful
+      run: echo "Tests completed successfully!"
